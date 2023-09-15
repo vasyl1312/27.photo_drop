@@ -22,13 +22,17 @@ Login must be unique, no matter what you enter in this field.login must contain 
 <img src="https://i.ibb.co/Q8K0zCX/login.jpg"  border="0">
 
 - Album Page
+  
   <img src="https://i.ibb.co/tzq9wqZ/login.jpg" border="0">
 
 - Create an album
+  
   <img src="https://i.ibb.co/bRjgxNF/login.jpg" border="0">
+  
   All fields are required
 
 - Album page
+  
   <img src="https://i.ibb.co/3B2rTxF/login.jpg" border="0">
 
 Ability to upload multiple photos at once.
