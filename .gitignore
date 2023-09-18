@@ -1,4 +1,7 @@
 .env
 .serverless
-node_modules
+dist
 task.txt
+script.txt
+src/swagger
+node_modules
