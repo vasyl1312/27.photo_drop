@@ -5,6 +5,52 @@ import express, { Request, Response } from 'express'
 const router = express.Router()
 
 const loginRouter = () => {
+  /**
+ * @swagger
+ * /api/login:
+ *   post:
+ *     summary: Authenticate a user
+ *     tags:
+ *       - Login
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               login:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *             required:
+ *               - login
+ *               - password
+ *           example:
+ *             login: Taras
+ *             password: qwerty
+ *     responses:
+ *       200:
+ *         description: Successful authentication
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 token:
+ *                   type: string
+ *             example:
+ *               id: 1
+ *               token: "your-token-here"
+ *       400:
+ *         description: Bad request - Missing login or password
+ *       401:
+ *         description: Unauthorized - User not found or password is incorrect
+ *       500:
+ *         description: Internal Server Error
+ */
   router.post('/', async (req: Request, res: Response) => {
     try {
       const { login, password } = req.body
