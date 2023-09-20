@@ -1,6 +1,7 @@
 import cors from 'cors'
 import express from 'express'
 import loginRouter from './routes/loginRouter'
+import currentRouter from './routes/currentRouter'
 import { swaggerRouter } from './swagger/router'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -11,6 +12,7 @@ app.use(express.json())
 
 const port = process.env.PORT || 5001
 app.use('/login', loginRouter())
+app.use('/current', currentRouter())
 app.use('/api_docs', swaggerRouter)
 
 app.listen(port, () => {

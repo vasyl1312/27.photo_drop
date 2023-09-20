@@ -30,7 +30,7 @@ const loginRouter = () => {
       }
 
       const token = jwt.sign({ userId: user.id }, `${process.env.SECRET_KEY}`, {
-        expiresIn: '1h',
+        expiresIn: '1hr',
       })
 
       user.token = token
