@@ -3,5 +3,4 @@
 dist
 task.txt
 script.txt
-src/swagger
 node_modules

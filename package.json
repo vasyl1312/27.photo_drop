@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "start": "set NODE_PATH=./dist && node ./dist/index.js",
+    "start": "NODE_PATH=./dist node ./dist/index.js",
     "dev": "nodemon",
-    "build": "del /S /Q dist && tsc -p tsconfig.json",
+    "build": "rm -rf dist && tsc -p tsconfig.json",
     "prod": "npm run build && npm run start",
     "dk-generate": "drizzle-kit generate:pg",
     "dk-deploy": "ts-node --require tsconfig-paths/register .drizzle/migrator.ts",

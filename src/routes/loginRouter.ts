@@ -12,9 +12,9 @@ const loginRouter = () => {
       if (!login || !password) {
         return res.status(400).json({ error: 'Login and password is required' })
       }
-    
+
       const db = await connect()
-      const query = sql`
+      const query = sql `
         SELECT id, login, password
         FROM photographers
         WHERE login = ${login}

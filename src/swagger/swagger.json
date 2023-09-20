@@ -1,0 +1,76 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Photo Drop (part photographers)",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Login"
+    }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Authenticate a user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "login": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["login", "password"]
+              },
+              "example": {
+                "login": "Taras",
+                "password": "qwerty"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": 1,
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5NTIxMjE5MCwiZXhwIjoxNjk1MjE1NzkwfQ.Xi24lWNpdlmtDWvwV1oU0UkTraEw0tBNX86ftj4ZOnI"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Server error : Bad request - Missing login or password"
+          },
+          "401": {
+            "description": "Unauthorized : User not found or password is incorrect"
+          },
+          "500": {
+            "description": "Unauthorized : User not found or password is incorrect"
+          }
+        }
+      }
+    }
+  }
+}
