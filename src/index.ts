@@ -10,7 +10,6 @@ app.use(cors())
 app.use(express.json())
 
 const port = process.env.PORT || 5001
-
 app.use('/login', loginRouter())
 app.use('/api_docs', swaggerRouter)
 

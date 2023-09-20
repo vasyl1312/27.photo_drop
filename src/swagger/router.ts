@@ -5,7 +5,12 @@ const router = express.Router()
 
 const CSS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css' //styles for swagger
 
-router.use('/', swaggerUi.serve)
+router.use('*.css', (req, res, next) => {
+  res.set('Content-Type', 'text/css')
+  next()
+})
+
 router.get('/', swaggerUi.setup(swaggerDocs, { customCssUrl: CSS_URL }))
+router.use('/', swaggerUi.serve)
 
 export const swaggerRouter = router

@@ -14,7 +14,7 @@ const loginRouter = () => {
       }
 
       const db = await connect()
-      const query = sql `
+      const query = sql`
         SELECT id, login, password
         FROM photographers
         WHERE login = ${login}
