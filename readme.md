@@ -1,4 +1,4 @@
-`PhotoDrop`
+<!-- `PhotoDrop`
 
 <h1>Requirements for task:</h1>
 
@@ -42,4 +42,71 @@ Should be no photos at album page
 - Dashboard page, no photos yet, show art print and an inscription about uploading a photo soon.
 - Settings, the ability to add a name only.
 - After the user's photos appear on the dashboard page, his albums and photos should be displayed.
-- All thumbnails must be watermarked like the full photo if the photo is locked.
+- All thumbnails must be watermarked like the full photo if the photo is locked. -->
+
+# Photo Drop
+
+> Commercial project
+
+## Prerequisites
+
+This project requires NodeJS (version 8 or later) and NPM.
+[Node](http://nodejs.org/) and [NPM](https://npmjs.org/) are really easy to install.
+To make sure you have them available on your machine,
+try running the following command.
+
+```sh
+$ npm -v && node -v
+8.17.0
+v17.4.0
+```
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+## Installation
+
+**BEFORE YOU INSTALL:** please read the [prerequisites](https://www.notion.so/27-Photo-Drop-F-B-f94b4897a6f1442193344dc6118e6841)
+
+Start with cloning this repo on your local machine:
+
+```sh
+$ git clone https://github.com/ORG/PROJECT.git
+$ cd PROJECT
+```
+
+For Windows users in packege.json:
+
+```sh
+  "scripts": {
+      "start": "set NODE_PATH=./dist && node ./dist/index.js",
+      "dev": "nodemon",
+      "build": "del /S /Q dist && tsc -p tsconfig.json",
+      "prod": "npm run build && npm run start",
+      "dk-generate": "drizzle-kit generate:pg",
+      "dk-deploy": "ts-node --require tsconfig-paths/register .drizzle/migrator.ts",
+      "dk-dev": "ts-node --require tsconfig-paths/register src/db/clinicQueryPush.ts"
+    },
+```
+
+To install run:
+
+```sh
+$ npm install
+```
+
+## Usage
+
+### Serving the app and building a distribution version
+
+```sh
+$ npm run build
+```
+
+This task will create a distribution version of the project
+inside your local `dist/` folder
+
+    After this, project opens at http://localhost:5000 If not, just open a new tab in your browser and paste there
+
+http://localhost:5000
