@@ -1,5 +1,3 @@
-import connect from '../db/dbConnect'
-import { sql } from 'drizzle-orm'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import express, { Request, Response } from 'express'
 const router = express.Router()
