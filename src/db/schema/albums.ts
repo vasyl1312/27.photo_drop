@@ -1,6 +1,5 @@
 import { InferModel } from 'drizzle-orm'
 import { pgTable, integer, varchar, serial } from 'drizzle-orm/pg-core'
-
 import { photographersSchema } from './photographer'
 
 export const albums = pgTable('albums', {

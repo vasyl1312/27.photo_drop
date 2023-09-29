@@ -13,7 +13,7 @@ app.use(express.json())
 
 const port = process.env.PORT || 5001
 app.use('/login', loginRouter())
-app.use('/albums', albumsRouter())
+app.use('/albums', albumsRouter)
 app.use('/current', currentRouter())
 app.use('/api_docs', swaggerRouter)
 

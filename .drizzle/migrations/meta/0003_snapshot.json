@@ -1,0 +1,212 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "id": "df578306-e447-4ed9-896d-df02480a0ee0",
+  "prevId": "d8739fe0-9b04-46c0-872b-dc2b20cf9ca5",
+  "tables": {
+    "albums": {
+      "name": "albums",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "owner": {
+          "name": "owner",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "counter_photo": {
+          "name": "counter_photo",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "location": {
+          "name": "location",
+          "type": "varchar(250)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "varchar(25)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "albums_owner_photographers_id_fk": {
+          "name": "albums_owner_photographers_id_fk",
+          "tableFrom": "albums",
+          "tableTo": "photographers",
+          "columnsFrom": [
+            "owner"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {}
+    },
+    "photographers": {
+      "name": "photographers",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "name": "password",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "login": {
+          "name": "login",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {}
+    },
+    "photos": {
+      "name": "photos",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "phone": {
+          "name": "phone",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {}
+    },
+    "photoSchema": {
+      "name": "photoSchema",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "album_id": {
+          "name": "album_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "people": {
+          "name": "people",
+          "type": "varchar[]",
+          "primaryKey": false,
+          "notNull": false,
+          "default": []
+        },
+        "original_resized_url": {
+          "name": "original_resized_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'https://photo-drop.onrender.com/albums/7/photos/01a3597bc0eedbd0ac15da64a928a0d2'"
+        },
+        "watermark_resized_url": {
+          "name": "watermark_resized_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'https://photo-drop.onrender.com/albums/7/photos/01a3597bc0eedbd0ac15da64a928a0d2'"
+        },
+        "original_url": {
+          "name": "original_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'https://photo-drop.onrender.com/albums/7/photos/01a3597bc0eedbd0ac15da64a928a0d2'"
+        },
+        "watermark_url": {
+          "name": "watermark_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'https://photo-drop.onrender.com/albums/7/photos/01a3597bc0eedbd0ac15da64a928a0d2'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "photoSchema_album_id_albums_id_fk": {
+          "name": "photoSchema_album_id_albums_id_fk",
+          "tableFrom": "photoSchema",
+          "tableTo": "albums",
+          "columnsFrom": [
+            "album_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
