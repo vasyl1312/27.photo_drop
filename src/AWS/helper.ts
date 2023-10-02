@@ -1,6 +1,5 @@
 import AWS from 'aws-sdk'
 import * as dotenv from 'dotenv'
-
 dotenv.config()
 
 const bucketName = process.env.AWS_BUCKET_NAME
@@ -15,8 +14,8 @@ const s3 = new AWS.S3({
 })
 
 export const generatePresignedUrl = async (photoName: string) => {
-  const folderName = 'photos/' // Задайте бажаний шлях до папки
-  const key = folderName + photoName // Комбінуємо шлях до папки та ім'я файлу
+  const folderName = 'photos/'
+  const key = folderName + photoName
 
   const params = {
     Bucket: bucketName,
@@ -26,9 +25,10 @@ export const generatePresignedUrl = async (photoName: string) => {
 
   try {
     const url = await s3.getSignedUrlPromise('getObject', params)
+
     return url
   } catch (error) {
-    console.error('Помилка при генерації Pre-Signed URL:', error)
+    console.error('Error getting Pre-Signed URL:', error)
     throw error
   }
 }

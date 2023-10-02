@@ -347,6 +347,131 @@
           }
         ]
       }
+    },
+    "/albums/${albumId}/photos": {
+      "post": {
+        "tags": ["Photo"],
+        "summary": "Create new photos in an album",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fileName": {
+                          "type": "string",
+                          "description": "Name of the photo file"
+                        },
+                        "phoneNumbers": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "List of phone numbers associated with the photo"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "files": [
+                  {
+                    "fileName": "first3.png",
+                    "phoneNumbers": ["34531145", "54113434"]
+                  },
+                  {
+                    "fileName": "seco3.jpg",
+                    "phoneNumbers": ["718", "135"]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "photos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "nameFile": {
+                            "type": "string",
+                            "description": "Name of the uploaded file"
+                          },
+                          "url": {
+                            "type": "string",
+                            "description": "URL of the uploaded photo"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "photos": [
+                    {
+                      "nameFile": "first3.png",
+                      "url": "https://photodrop2.s3.eu-central-1.amazonaws.com/photos/20_28.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIATS5BI5YUWGM2YQVP%2F20231002%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20231002T101035Z&X-Amz-Expires=3600&X-Amz-Signature=7ac1e144715bdcbc4bc9eb4d07866a96ca896d99361820101f8f240d188b2630&X-Amz-SignedHeaders=host"
+                    },
+                    {
+                      "nameFile": "seco3.jpg",
+                      "url": "https://photodrop2.s3.eu-central-1.amazonaws.com/photos/20_29.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIATS5BI5YUWGM2YQVP%2F20231002%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20231002T101035Z&X-Amz-Expires=3600&X-Amz-Signature=7dd19657fc9dea061250a5e406420514a5181f65aeeb61e103882aea7784b19e&X-Amz-SignedHeaders=host"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized: Token is missing or invalid"
+          },
+          "403": {
+            "description": "Forbidden: Not authorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer Authorization Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "albumId",
+            "in": "path",
+            "description": "ID of the album",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
     }
   }
 }

@@ -70,7 +70,8 @@ const uploadPhotoToDb = async (req: Request, res: Response) => {
               }
 
               const url = await generatePresignedUrl(photoName)
-              return { name: photoName, url }
+              const nameFile = files[index].fileName
+              return { nameFile, url }
             } else {
               throw new Error('Photo`s name not found')
             }
