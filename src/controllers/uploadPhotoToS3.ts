@@ -4,7 +4,7 @@ import { uploadFile } from '../AWS/s3'
 
 const upload = multer({ dest: 'uploads/' })
 
-const uploadPhotoController = async (req: Request, res: Response) => {
+const uploadPhotoToS3 = async (req: Request, res: Response) => {
   try {
     const albumId = req.params.id
     const file = req.file
@@ -23,4 +23,4 @@ const uploadPhotoController = async (req: Request, res: Response) => {
   }
 }
 
-export default uploadPhotoController
+export default uploadPhotoToS3
