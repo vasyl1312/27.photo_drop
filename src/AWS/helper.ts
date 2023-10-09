@@ -13,7 +13,7 @@ const s3 = new AWS.S3({
   secretAccessKey,
 })
 
-export const generatePresignedUrl = async (photoName: string) => {
+export const generatePresignedUrl = async (photoName: string): Promise<string | null> => {
   const folderName = 'photos/'
   const key = folderName + photoName
 
@@ -24,11 +24,19 @@ export const generatePresignedUrl = async (photoName: string) => {
   }
 
   try {
-    const url = await s3.getSignedUrlPromise('getObject', params)
+    const url = await new Promise<string>((resolve, reject) => {
+      s3.getSignedUrl('putObject', params, (err, url) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(url)
+        }
+      })
+    })
 
     return url
   } catch (error) {
-    console.error('Error getting Pre-Signed URL:', error)
-    throw error
+    console.error('Error:', error)
+    return null
   }
 }
