@@ -9,6 +9,7 @@
     "dk-dev": "ts-node --require tsconfig-paths/register src/db/clinicQueryPush.ts"
   },
   "dependencies": {
+    "aws-lambda": "^1.0.7",
     "aws-sdk": "^2.1465.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -17,11 +18,13 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
     "pg": "^8.11.1",
+    "sharp": "^0.32.6",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
     "@aws-sdk/types": "^3.418.0",
+    "@types/aws-lambda": "^8.10.124",
     "@types/cors": "^2.8.14",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.17",

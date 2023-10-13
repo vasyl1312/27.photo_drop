@@ -14,8 +14,7 @@ const s3 = new AWS.S3({
 })
 
 export const generatePresignedUrl = async (photoName: string): Promise<string | null> => {
-  const folderName = 'photos/'
-  const key = folderName + photoName
+  const key = photoName
 
   const params = {
     Bucket: bucketName,
