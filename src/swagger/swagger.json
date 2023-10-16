@@ -6,10 +6,6 @@
   },
   "servers": [
     {
-      "url": "https://photodrop.2.ie-1.fl0.io/api_docs/",
-      "description": "Docs Faster Server"
-    },
-    {
       "url": "https://photo-drop-kappa.vercel.app/",
       "description": "Production Server"
     },
@@ -308,7 +304,7 @@
                   "maxPage": 1,
                   "albums": [
                     {
-                      "id": 22,
+                      "id": 23,
                       "owner": 1,
                       "name": "Test",
                       "counterPhoto": 0,

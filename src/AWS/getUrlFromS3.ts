@@ -1,51 +1,35 @@
-import { Request, Response } from 'express'
-// import { S3Client } from '@aws-sdk/client-s3'
-// import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-// import { GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3'
+import { S3Client, S3ClientConfig } from '@aws-sdk/client-s3'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+import { GetObjectCommand } from '@aws-sdk/client-s3'
 
-// const s3Client = new S3Client({ region: 'eu-central-1' })
-// const bucket = 'photo-drop-3-updated'
+const bucket = process.env.AWS_BUCKET_NAME_STORAGE
 
-// async function getSignedDownloadUrl(path: any) {
-//   let command = new GetObjectCommand({ Bucket: bucket, Key: path })
-//   return await getSignedUrl(s3Client, command, { expiresIn: 3600 })
-// }
+const s3ClientConfig: S3ClientConfig = {
+  region: `${process.env.AWS_BUCKET_REGION}`,
+  credentials: {
+    accessKeyId: `${process.env.AWS_ACCESS_KEY1}`,
+    secretAccessKey: `${process.env.AWS_SECRET_KEY1}`,
+  },
+}
 
-// async function getSignedUploadUrl(path: any) {
-//   let command = new PutObjectCommand({ Bucket: bucket, Key: path })
-//   return await getSignedUrl(s3Client, command, { expiresIn: 3600 })
-// }
+const s3Client = new S3Client(s3ClientConfig)
 
-// const uploadPhotoToDb_2 = async (req: Request, res: Response) => {
-//   try {
-//     let inputURL = await getSignedDownloadUrl('original/photos/22_118.png')
-//     let uploadURL = await getSignedUploadUrl('original/photos/22_118.png')
+async function getSignedDownloadUrl(path: any) {
+  let command = new GetObjectCommand({ Bucket: bucket, Key: path })
+  return await getSignedUrl(s3Client, command, { expiresIn: 3600 })
+}
 
-//     return { inputURL, uploadURL }
-//   } catch (error) {
-//     console.error('Error:', error)
-//     return res.status(500).send('Internal Server Error')
-//   }
-// }
-
-const uploadPhotoToDb_2 = (req: Request, res: Response) => {
+const uploadPhotoToDb_2 = async (photoName: string) => {
   try {
-    console.log('imageUrl')
-    let imageUrl = 'ssss'
-    // const imageUrl = await getSignedUrl(
-    //   s3Client,
-    //   new GetObjectCommand({
-    //     Bucket: bucketName,
-    //     Key: 'original/photos/22_118.png',
-    //   }),
-    //   { expiresIn: 60 } // 60 seconds
-    // )
-    // console.log(imageUrl)
-    return imageUrl
-    // res.send(imageUrl)
+    const photoUrlOrig = await getSignedDownloadUrl(`original/${photoName}`)
+    const photoUrlTrum = await getSignedDownloadUrl(`thumbnails/${photoName}`)
+    const photoUrlOrigWater = await getSignedDownloadUrl(`watermarked_original/${photoName}`)
+    const photoUrlTrumWater = await getSignedDownloadUrl(`watermarked_thumbnails/${photoName}`)
+
+    return { photoUrlOrig, photoUrlTrum, photoUrlOrigWater, photoUrlTrumWater }
   } catch (error) {
     console.error('Error:', error)
-    return res.status(500).send('Internal Server Error')
+    return error
   }
 }
 

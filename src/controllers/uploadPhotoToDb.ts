@@ -4,6 +4,7 @@ import { Request, Response } from 'express'
 import { albums } from '../db/schema/albums'
 import { generatePresignedUrl } from '../AWS/helper'
 import { photoSchema, TNewPhotos } from '../db/schema/photoSchema'
+import uploadPhotoToDb_2 from '../AWS/getUrlFromS3'
 
 import connect from '../db/dbConnect'
 
@@ -11,6 +12,13 @@ interface DecodedToken {
   userId: number
   iat: number
   exp: number
+}
+
+type UrlPhoto = {
+  photoUrlOrig: string
+  photoUrlTrum: string
+  photoUrlOrigWater: string
+  photoUrlTrumWater: string
 }
 
 const uploadPhotoToDb = async (req: Request, res: Response) => {
@@ -71,6 +79,19 @@ const uploadPhotoToDb = async (req: Request, res: Response) => {
 
               const url = await generatePresignedUrl(photoName)
               const nameFile = files[index].fileName
+              const urlPhoto: UrlPhoto = await uploadPhotoToDb_2(photoName)
+
+              await db
+                .update(photoSchema)
+                .set({
+                  originalResizedUrl: urlPhoto.photoUrlOrig,
+                  watermarkResizedUrl: urlPhoto.photoUrlTrum,
+                  originalUrl: urlPhoto.photoUrlOrigWater,
+                  watermarkUrl: urlPhoto.photoUrlTrumWater,
+                })
+                .where(sql`${photoSchema.id} = ${photoId}`)
+                .execute()
+
               return { nameFile, url }
             } else {
               throw new Error('Photo`s name not found')
@@ -80,7 +101,7 @@ const uploadPhotoToDb = async (req: Request, res: Response) => {
           }
         })
       )
-
+      // uploadPhotoToDb_2('22_129.png')
       return res.status(201).json({ photos: photoUrls })
     } else {
       return res.status(500).json({ error: 'Failed to retrieve the photo ID' })
