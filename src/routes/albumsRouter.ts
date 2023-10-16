@@ -14,7 +14,7 @@ router.get('/:id/photos/:key', getPhotoController) //http://localhost:5000/album
 router.post('/:id/photos', uploadPhotoToDb)
 // router.get('/:id/test', uploadPhotoToDb_2)
 router.get('/i', (req, res) => {
-  res.send('Привіт, це новий маршрут!')
+  res.send('hello!')
 })
 
 export default router
