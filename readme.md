@@ -44,7 +44,7 @@ Should be no photos at album page
 - After the user's photos appear on the dashboard page, his albums and photos should be displayed.
 - All thumbnails must be watermarked like the full photo if the photo is locked. -->
 
-# Photo Drop (First part)
+# Photo Drop (First part) [Read requirements](https://www.notion.so/27-Photo-Drop-F-B-f94b4897a6f1442193344dc6118e6841)
 
 Backend Part(Mine) [Link](https://photo-drop.onrender.com/api_docs/)
 
